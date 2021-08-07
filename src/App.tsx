@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import EnddoList from './feature/end-do-list/EnddoList';
 import TodoList from './feature/to-do-list/TodoList';
 
@@ -7,6 +7,7 @@ function App(): JSX.Element {
   const [todoList, setTodoList] = useState<string[]>([]);
   const [endDoList, setEnddoList] = useState<string[]>([]);
   const [endTimeList, setEndTtimeList] = useState<string[]>([]);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const createTodoItme = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -16,6 +17,7 @@ function App(): JSX.Element {
   const addTodoList = () => {
     const _todoList = [...todoList, todoItem];
     setTodoList(_todoList);
+    setTodoItme('');
   };
 
   const removeDo = (idx: number) => {
@@ -38,8 +40,9 @@ function App(): JSX.Element {
     <>
       <div>
         <input
+          ref={inputRef}
           type="text"
-          placeholder="일정을 입력 해 주세요"
+          placeholder="할 일을 입력하세요"
           onChange={(e) => createTodoItme(e)}
           style={{ width: '88%', height: '30px' }}
           value={todoItem}
@@ -48,7 +51,7 @@ function App(): JSX.Element {
           onClick={addTodoList}
           style={{ height: '33px', margin: '0', width: '10%' }}
         >
-          add job
+          등록
         </button>
         <br />
         <br />
