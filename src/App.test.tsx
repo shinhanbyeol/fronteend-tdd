@@ -28,7 +28,7 @@ describe('<App />', () => {
     expect(input.getAttribute('value')).toBe('TDD TEST');
   });
 
-  it('calls onInsert and clears input', () => {
+  it('calls onInsert and add Todo List', () => {
     const { getByText, getByPlaceholderText } = render(<App />);
     const input = getByPlaceholderText('할 일을 입력하세요');
     const button = getByText('등록');
@@ -45,6 +45,13 @@ describe('<App />', () => {
     expect(input.textContent === 'TDD 배우기'); // input 내용 검증
     // 버튼 클릭
     fireEvent.click(button);
-    expect(input).toHaveAttribute('value', ''); // input이 비워져야함
+    todoTest();
+
+    function todoTest() {
+      const { getByText } = render(<App />);
+      const liTodo = getByText('TDD 배우기');
+      console.log(liTodo);
+      expect(liTodo);
+    }
   });
 });
